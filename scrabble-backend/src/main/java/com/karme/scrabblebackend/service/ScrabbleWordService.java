@@ -48,7 +48,7 @@ public class ScrabbleWordService {
         String newWord = scrabbleWordInfoDto.getWord().toUpperCase();
         if (scrabbleWordsRepository.existsByWord(newWord)) {
             log.error("Word {} already exists", newWord);
-            throw new RuntimeException("Word already exists");
+            throw new RuntimeException("Word '" + newWord + "' already exists");
         }
         ScrabbleWord scrabbleWord = new ScrabbleWord();
         scrabbleWord.setWord(newWord);
