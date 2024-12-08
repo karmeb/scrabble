@@ -1,0 +1,19 @@
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.homepage-info-text {
+    text-align: center;
+}
+
+.card {
+    width: fit-content;
+    min-width: 250px;
+    max-width: 90vw;
+    text-align: center;
+    overflow: auto;
+}

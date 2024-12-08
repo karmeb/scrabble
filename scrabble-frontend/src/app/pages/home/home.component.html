@@ -1,0 +1,49 @@
+<div class="container homepage-container">
+    <div class="homepage-info-text">
+        <h1 class="title is-2">Check Scrabble words</h1>
+        <p>Find out if a word is valid for a Scrabble game and how much points it is worth.</p>
+    </div>
+    <form [formGroup]="applyForm" (submit)="onSubmit()" class="field has-addons">
+        <div class="control">
+            <input id="word" formControlName="word" class="input is-medium is-link" type="text"
+                placeholder="Enter a word">
+            @if(word.invalid && (word.dirty || word.touched)) {
+            <div class="form-field-invalid-message">
+                Word is required
+            </div>
+            }
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary is-medium">
+                Search
+            </button>
+        </div>
+    </form>
+
+    @if (scrabbleWord() && scrabbleWord()?.isValid) {
+    <div class="card has-background-success-light">
+        <header class="card-header">
+            <p class="card-header-title"><strong>{{scrabbleWord()?.word | uppercase}}</strong></p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <p>Is <strong> valid </strong>word</p>
+                <p>Gives <strong>{{scrabbleWord()?.points}} </strong>points</p>
+            </div>
+        </div>
+    </div>
+    }
+    @if (scrabbleWord() && !scrabbleWord()?.isValid) {
+    <div class="card has-background-danger-light">
+        <header class="card-header">
+            <p class="card-header-title"><strong>{{scrabbleWord()?.word | uppercase}}</strong></p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <p>Is <strong> not valid </strong>word</p>
+            </div>
+        </div>
+    </div>
+    }
+
+</div>

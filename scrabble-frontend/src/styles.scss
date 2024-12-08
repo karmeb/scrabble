@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Bulma colors overwrite
+$primary: #16502d;
+$info: #c2f3ff;
+$danger: #cc2c00;
+$success: #37c871;
+$link: #2c89a0;
+$warning: #f39c12;
+
+.form-field-invalid-message {
+    color: $danger;
+}
+
+@import 'bulma/sass';
