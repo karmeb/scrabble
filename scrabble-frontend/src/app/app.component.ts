@@ -7,14 +7,17 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [RouterOutlet, HeaderComponent],
   template: `
   <app-header />
-  <main>
+  <main class="section">
     <router-outlet />
   </main>
   `,
   styles: [
     `
     main {
-      padding: 16px;
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      height: 70%;
     }
     `
   ]

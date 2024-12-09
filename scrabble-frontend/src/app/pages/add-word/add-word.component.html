@@ -1,1 +1,39 @@
-<p>add-word works!</p>
+<div class="container homepage-container">
+    <div class="homepage-info-text">
+        <h1 class="title is-2">Add new valid word</h1>
+        <p>Found a missing word that you think should be added to the list? Write it here and new word will be added.
+        </p>
+    </div>
+    <form [formGroup]="applyForm" (submit)="onSubmit()" class="field has-addons">
+        <div class="control">
+            <input id="word" formControlName="word" class="input is-medium is-link" type="text"
+                placeholder="Enter a word">
+            @if(word.invalid && (word.dirty || word.touched)) {
+            @if(word.errors?.['required']) {
+            <div class="form-field-invalid-message">
+                Word is required
+            </div>
+            }
+            @if(word.errors?.['maxlength']) {
+            <div class="form-field-invalid-message">
+                Word must not be longer than {{ word.errors?.['maxlength'].requiredLength }} letters
+            </div>
+            }
+
+            }
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary is-medium">
+                Submit
+            </button>
+        </div>
+    </form>
+
+    @if(errorMessage()){
+    <div class="notification is-danger is-light">
+        <button (click)="closeErrorNotification()" class="delete"></button>
+        <p class="server-error-message">{{errorMessage()}}</p>
+    </div>
+    }
+
+</div>

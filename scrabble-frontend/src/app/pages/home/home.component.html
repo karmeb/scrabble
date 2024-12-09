@@ -8,9 +8,17 @@
             <input id="word" formControlName="word" class="input is-medium is-link" type="text"
                 placeholder="Enter a word">
             @if(word.invalid && (word.dirty || word.touched)) {
-            <div class="form-field-invalid-message">
-                Word is required
-            </div>
+                @if(word.errors?.['required']) {
+                    <div class="form-field-invalid-message">
+                        Word is required
+                    </div>
+                }
+                @if(word.errors?.['maxlength']) {
+                <div class="form-field-invalid-message">
+                    Word must not be longer than {{ word.errors?.['maxlength'].requiredLength }} letters
+                </div>
+                }
+
             }
         </div>
         <div class="control">
@@ -19,6 +27,13 @@
             </button>
         </div>
     </form>
+
+    @if(errorMessage()){
+    <div class="notification is-danger is-light">
+        <button (click)="closeErrorNotification()" class="delete"></button>
+        <p class="server-error-message">{{errorMessage()}}</p>
+    </div>
+    }
 
     @if (scrabbleWord() && scrabbleWord()?.isValid) {
     <div class="card has-background-success-light">

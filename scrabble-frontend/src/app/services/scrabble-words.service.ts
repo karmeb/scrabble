@@ -12,4 +12,9 @@ export class ScrabbleWordsService {
     const url = `http://localhost:8080/api/words/${word}/info`;
     return this.http.get<ScrabbleWord>(url);
   }
+
+  postNewWord(newWord: string) {
+    const url = `http://localhost:8080/api/words/add`;
+    return this.http.post(url, { "word": newWord });
+  }
 }
