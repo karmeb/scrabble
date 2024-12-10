@@ -15,7 +15,7 @@ public class PointsCalculationService {
         for (Character letter : word.toCharArray()) {
             totalPoints += getPointsForLetter(letter);
         }
-        log.info("Calculated points for word: {}, total points: {}", word, totalPoints);
+        log.info("Calculated points for word '{}', total points: {}", word, totalPoints);
         return totalPoints;
     }
 
@@ -23,7 +23,7 @@ public class PointsCalculationService {
         try {
             return ScrabbleLetter.valueOf(letter.toString().toUpperCase()).getPoints();
         } catch (Exception e) {
-            log.error("Unable to get points for letter: {}, due to error: ", letter, e);
+            log.error("Unable to get points for letter '{}', due to error: ", letter, e);
             throw new RuntimeException("Unable to get points for letter: " + letter, e);
         }
     }

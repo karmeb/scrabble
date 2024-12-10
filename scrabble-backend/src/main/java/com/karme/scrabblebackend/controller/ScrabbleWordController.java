@@ -35,14 +35,14 @@ public class ScrabbleWordController {
             @Size(max = 100, message = "Word must not exceed 100 characters")
             @Pattern(regexp = "^[a-zA-Z]+$", message = "Word must contain only letters")
             String word) {
-        log.info("Get word info request received for word: {}", word);
+        log.info("Get word info request received for word '{}'", word);
         return scrabbleWordService.getWordInfo(word);
     }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addNewWord(@Valid @RequestBody ScrabbleWordDto scrabbleWordDto) {
-        log.info("request to add new word received for word: {}", scrabbleWordDto.getWord());
+        log.info("Request to add new word received for word '{}'", scrabbleWordDto.getWord());
         scrabbleWordService.addWord(scrabbleWordDto);
     }
 
