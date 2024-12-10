@@ -21,7 +21,7 @@ public class ScrabbleWordService {
     private final PointsCalculationService pointsCalculationService;
 
     public ScrabbleWordInfoDto getWordInfo(String word) {
-        Optional<ScrabbleWord> scrabbleWordOptional = scrabbleWordsRepository.findByWord(word.toUpperCase());
+        Optional<ScrabbleWord> scrabbleWordOptional = scrabbleWordsRepository.findByWord(word.toLowerCase());
         Boolean isValidWord = scrabbleWordOptional.isPresent();
 
         return ScrabbleWordInfoDto.builder()
@@ -38,14 +38,14 @@ public class ScrabbleWordService {
         for (String word : words) {
             if (!scrabbleWordsRepository.existsByWord(word)) {
                 ScrabbleWord scrabbleWord = new ScrabbleWord();
-                scrabbleWord.setWord(word);
+                scrabbleWord.setWord(word.toLowerCase());
                 scrabbleWordsRepository.save(scrabbleWord);
             }
         }
     }
 
     public void addWord(ScrabbleWordDto scrabbleWordInfoDto) {
-        String newWord = scrabbleWordInfoDto.getWord().toUpperCase();
+        String newWord = scrabbleWordInfoDto.getWord().toLowerCase();
         if (scrabbleWordsRepository.existsByWord(newWord)) {
             log.error("Word {} already exists", newWord);
             throw new RuntimeException("Word '" + newWord + "' already exists");
