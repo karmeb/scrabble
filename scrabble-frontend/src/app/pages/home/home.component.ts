@@ -2,8 +2,9 @@ import { Component, inject, signal } from '@angular/core';
 import { ScrabbleWordsService } from '../../services/scrabble-words.service';
 import { catchError } from 'rxjs';
 import { ScrabbleWord } from '../../model/scrabble-word.type';
-import { FormControl, FormGroup, MaxLengthValidator, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UpperCasePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,9 @@ import { UpperCasePipe } from '@angular/common';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  toasterService = inject(ToastrService);
   scrabbleWordsService = inject(ScrabbleWordsService);
   scrabbleWord = signal<ScrabbleWord | null>(null);
-  errorMessage = signal<string | null>(null);
 
   applyForm = new FormGroup({
     word: new FormControl('', [Validators.required, Validators.maxLength(100)])
@@ -37,14 +38,13 @@ export class HomeComponent {
             const errorString = Object.values(error.error)
               .map((message) => `${message}`)
               .join('\n');
-            this.errorMessage.set(errorString);
+            this.showErrorToaster(errorString);
           } else {
-            this.errorMessage.set('An error occurred while fetching word info.');
+            this.showErrorToaster('An error occurred while fetching word info.');
           }
           throw error;
         })
-      ).subscribe((wordInfo: ScrabbleWord) => {
-        this.errorMessage.set(null);
+    ).subscribe((wordInfo: ScrabbleWord) => {
         this.scrabbleWord.set(wordInfo);
       })
   }
@@ -53,7 +53,8 @@ export class HomeComponent {
     return this.applyForm.get('word') as FormControl;
   }
 
-  closeErrorNotification() {
-    this.errorMessage.set(null);
+
+  showErrorToaster(message: string) {
+    this.toasterService.error(message, 'Error:',);
   }
 }

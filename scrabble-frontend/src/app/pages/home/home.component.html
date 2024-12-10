@@ -1,6 +1,6 @@
 <div class="container homepage-container">
     <div class="homepage-info-text">
-        <h1 class="title is-2">Check Scrabble words</h1>
+        <h1 class="title is-2  mb-2">Check Scrabble words</h1>
         <p>Find out if a word is valid for a Scrabble game and how much points it is worth.</p>
     </div>
     <form [formGroup]="applyForm" (submit)="onSubmit()" class="field has-addons">
@@ -27,13 +27,6 @@
             </button>
         </div>
     </form>
-
-    @if(errorMessage()){
-    <div class="notification is-danger is-light">
-        <button (click)="closeErrorNotification()" class="delete"></button>
-        <p class="server-error-message">{{errorMessage()}}</p>
-    </div>
-    }
 
     @if (scrabbleWord() && scrabbleWord()?.isValid) {
     <div class="card has-background-success-light">

@@ -1,6 +1,6 @@
-<div class="container homepage-container">
-    <div class="homepage-info-text">
-        <h1 class="title is-2">Add new valid word</h1>
+<div class="container new-word-page-container">
+    <div class="new-word-info-text">
+        <h1 class="title is-2 mb-2">Add new word</h1>
         <p>Found a missing word that you think should be added to the list? Write it here and new word will be added.
         </p>
     </div>
@@ -28,12 +28,5 @@
             </button>
         </div>
     </form>
-
-    @if(errorMessage()){
-    <div class="notification is-danger is-light">
-        <button (click)="closeErrorNotification()" class="delete"></button>
-        <p class="server-error-message">{{errorMessage()}}</p>
-    </div>
-    }
 
 </div>
