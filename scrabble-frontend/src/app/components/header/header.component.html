@@ -3,14 +3,14 @@
         <div class="navbar-brand">
             <a class="navbar-item" routerLink="/">
                 <img src="assets/logo.png" alt="Logo" style="max-height: 40px; margin-right: 10px;" />
-                <span class="navbar-item is-size-4">Scrabble Words Helper</span>
+                <span class="navbar-item is-size-4">{{title()}}</span>
             </a>
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <a class="button is-primary is-outlined is-medium" routerLink="/add-word">
-                    <span>Add New Word</span>
+                <a class="button is-primary is-outlined is-medium" [routerLink]="routPath()">
+                    <span>{{navigationButtonText[routPath()]}}</span>
                 </a>
             </div>
         </div>
