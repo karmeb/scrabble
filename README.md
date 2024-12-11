@@ -33,3 +33,7 @@ This app allows users check if a word is considered a valid word (based on the w
     npm start
     ```
 4. Application should be accessible at http://localhost:4200/
+
+## Version Details
+- Java 23
+- Angular 19
