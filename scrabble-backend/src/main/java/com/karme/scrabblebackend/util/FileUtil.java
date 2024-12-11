@@ -16,7 +16,7 @@ public class FileUtil {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Unable to find file named: " + filePath, e);
+            throw new RuntimeException("Unable to find file with path: " + filePath, e);
         } catch (Exception e) {
             throw new RuntimeException("Unexpected error occurred while attempting to read from file: " + filePath, e);
         }

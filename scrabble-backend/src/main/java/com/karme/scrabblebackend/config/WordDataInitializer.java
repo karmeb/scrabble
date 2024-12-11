@@ -14,13 +14,19 @@ import org.springframework.stereotype.Component;
 public class WordDataInitializer implements ApplicationRunner {
     private final ScrabbleWordService scrabbleWordService;
 
-    @Value("${file.words.path}")
+    @Value("${file.words.path:#{null}}")
     private String filePath;
 
     @Override
     public void run(ApplicationArguments args) {
-        log.info("Initializing word data, words file path used: {}", filePath);
+
+        if (filePath == null) {
+            throw new RuntimeException("No initial words list file path specified");
+        }
+
+        log.info("Initializing word data, using words file path: {}", filePath);
         scrabbleWordService.saveWordsFromFile(filePath);
+        log.info("Initializing word data completed");
     }
 }
 

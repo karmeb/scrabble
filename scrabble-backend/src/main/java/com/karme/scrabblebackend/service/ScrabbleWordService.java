@@ -31,21 +31,8 @@ public class ScrabbleWordService {
                 .build();
     }
 
-
-    public void saveWordsFromFile(String filePath) {
-        List<String> words = FileUtil.readLinesFromFile(filePath);
-
-        for (String word : words) {
-            if (!scrabbleWordsRepository.existsByWord(word)) {
-                ScrabbleWord scrabbleWord = new ScrabbleWord();
-                scrabbleWord.setWord(word.toLowerCase());
-                scrabbleWordsRepository.save(scrabbleWord);
-            }
-        }
-    }
-
-    public void addWord(ScrabbleWordDto scrabbleWordInfoDto) {
-        String newWord = scrabbleWordInfoDto.getWord().toLowerCase();
+    public void addWord(ScrabbleWordDto scrabbleWordDto) {
+        String newWord = scrabbleWordDto.getWord().toLowerCase();
         if (scrabbleWordsRepository.existsByWord(newWord)) {
             log.error("User attempted to add a word '{}' which already exists in db", newWord);
             throw new RuntimeException("Word '" + newWord + "' already exists");
@@ -53,5 +40,22 @@ public class ScrabbleWordService {
         ScrabbleWord scrabbleWord = new ScrabbleWord();
         scrabbleWord.setWord(newWord);
         scrabbleWordsRepository.save(scrabbleWord);
+    }
+
+
+    public void saveWordsFromFile(String filePath) {
+        try {
+            List<String> words = FileUtil.readLinesFromFile(filePath);
+            for (String word : words) {
+                if (!scrabbleWordsRepository.existsByWord(word)) {
+                    ScrabbleWord scrabbleWord = new ScrabbleWord();
+                    scrabbleWord.setWord(word.toLowerCase());
+                    scrabbleWordsRepository.save(scrabbleWord);
+                }
+            }
+        } catch(Exception e) {
+            log.error("Error reading words from file, {}", e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }

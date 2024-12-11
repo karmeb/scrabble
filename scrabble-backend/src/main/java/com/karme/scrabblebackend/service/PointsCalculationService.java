@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class PointsCalculationService {
     public Integer calculateScrabbleWordPoints(String word) {
-        if (word == null || word.isEmpty()) {
+        if (word == null || word.isBlank()) {
             return null;
         }
         Integer totalPoints = 0;
@@ -19,12 +19,12 @@ public class PointsCalculationService {
         return totalPoints;
     }
 
-    private Integer getPointsForLetter(Character letter) {
+    private Integer getPointsForLetter(Character character) {
         try {
-            return ScrabbleLetter.valueOf(letter.toString().toUpperCase()).getPoints();
+            return ScrabbleLetter.valueOf(character.toString().toUpperCase()).getPoints();
         } catch (Exception e) {
-            log.error("Unable to get points for letter '{}', due to error: ", letter, e);
-            throw new RuntimeException("Unable to get points for letter: " + letter, e);
+            log.error("Unable to get points for character '{}', due to error: ", character, e);
+            throw new RuntimeException("Unable to get points for character: " + character, e);
         }
     }
 }
