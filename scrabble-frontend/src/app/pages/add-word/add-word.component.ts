@@ -37,7 +37,7 @@ export class AddWordComponent {
               .join('\n');
             this.showErrorToaster(errorString);
           } else {
-            this.showErrorToaster(error.error.message);
+            this.showErrorToaster(error.error.message || "Unable to add the word, please try again later.");
           }
           throw error;
         })

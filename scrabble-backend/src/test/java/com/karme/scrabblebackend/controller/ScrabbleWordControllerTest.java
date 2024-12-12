@@ -73,7 +73,6 @@ class ScrabbleWordControllerTest {
     @Test
     void handleValidationExceptions_returnsBadRequestStatusToMethodArgumentValidationError() throws Exception {
         ScrabbleWordDto invalidScrabbleWordDto = new ScrabbleWordDto();
-        invalidScrabbleWordDto.setWord("");
 
         ResultActions response = mockMvc.perform(post("/api/words/add")
                         .contentType(MediaType.APPLICATION_JSON)

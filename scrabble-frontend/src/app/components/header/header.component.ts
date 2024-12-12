@@ -10,7 +10,7 @@ import { Router, RouterLink, NavigationEnd } from '@angular/router';
 export class HeaderComponent implements OnInit {
   router = inject(Router)
   title = signal('Scrabble Words Helper')
-  routPath = signal<string>('')
+  routePath = signal<string>('')
 
   navigationButtonText: { [key: string]: string } = {
     '/': 'Check Words',
@@ -23,9 +23,9 @@ export class HeaderComponent implements OnInit {
         if (event instanceof NavigationEnd) {
           let currentUrl = this.router.url;
           if (currentUrl === "/") {
-            this.routPath.set("/add-word")
+            this.routePath.set("/add-word")
           } else {
-            this.routPath.set("/")
+            this.routePath.set("/")
           }
         }
       }

@@ -7,14 +7,15 @@ import { ScrabbleWord } from '../model/scrabble-word.type';
 })
 export class ScrabbleWordsService {
   http = inject(HttpClient);
+  apiBaseUrl = "http://localhost:8080/api/words"
 
   getWordInfoFromApi(word: string) {
-    const url = `http://localhost:8080/api/words/${word}/info`;
+    const url = `${this.apiBaseUrl}/${word}/info`;
     return this.http.get<ScrabbleWord>(url);
   }
 
   postNewWord(newWord: string) {
-    const url = `http://localhost:8080/api/words/add`;
+    const url = `${this.apiBaseUrl}/add`;
     return this.http.post(url, { "word": newWord });
   }
 }

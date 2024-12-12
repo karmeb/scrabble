@@ -9,17 +9,18 @@
             <input id="word" formControlName="word" class="input is-medium is-link" type="text"
                 placeholder="Enter a word">
             @if(word.invalid && (word.dirty || word.touched)) {
-            @if(word.errors?.['required']) {
-            <div class="form-field-invalid-message">
-                Word is required
-            </div>
-            }
-            @if(word.errors?.['maxlength']) {
-            <div class="form-field-invalid-message">
-                Word must not be longer than {{ word.errors?.['maxlength'].requiredLength }} letters
-            </div>
-            }
-
+                
+                @if(word.errors?.['required']) {
+                <div class="form-field-invalid-message">
+                    Word is required
+                </div>
+                }
+                
+                @if(word.errors?.['maxlength']) {
+                <div class="form-field-invalid-message">
+                    Word must not be longer than {{ word.errors?.['maxlength'].requiredLength }} letters
+                </div>
+                }
             }
         </div>
         <div class="control">

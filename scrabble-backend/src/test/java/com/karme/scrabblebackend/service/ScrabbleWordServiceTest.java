@@ -31,11 +31,7 @@ class ScrabbleWordServiceTest {
         String wordToCheck = "someword";
         Integer points = 14;
 
-        ScrabbleWord scrabbleWord = new ScrabbleWord();
-        scrabbleWord.setWord(wordToCheck);
-        scrabbleWord.setId(1L);
-
-        when(scrabbleWordsRepository.findByWord(wordToCheck)).thenReturn(Optional.of(scrabbleWord));
+        when(scrabbleWordsRepository.existsByWord(wordToCheck)).thenReturn(true);
         when(pointsCalculationService.calculateScrabbleWordPoints(wordToCheck)).thenReturn(14);
 
         assertEquals(wordToCheck, scrabbleWordService.getWordInfo(wordToCheck).getWord());
@@ -47,7 +43,7 @@ class ScrabbleWordServiceTest {
     void getWordInfo_returnsScrabbleWordInfoDto_WhenWordNotInDatabase() {
         String wordToCheck = "anotherword";
 
-        when(scrabbleWordsRepository.findByWord(wordToCheck)).thenReturn(Optional.empty());
+        when(scrabbleWordsRepository.existsByWord(wordToCheck)).thenReturn(false);
 
         assertEquals(wordToCheck, scrabbleWordService.getWordInfo(wordToCheck).getWord());
         assertNull(scrabbleWordService.getWordInfo(wordToCheck).getPoints());
