@@ -18,6 +18,7 @@ This app allows users check if a word is considered a valid word (based on the w
     ```bash
     ./gradlew bootRun
     ```
+4. To use different words list to initialize database, change the path in the property 'file.words.path', or change the words list in the dictionary.txt file saved in the src-> main -> resources
  
 ### Frontend
 1. navigate to the frontend directory
